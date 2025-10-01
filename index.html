@@ -17,18 +17,103 @@
             color: #fff;
             overflow: hidden;
             height: 100vh;
+            cursor: none;
+        }
+
+        /* Introduction Screen */
+        #intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            cursor: none;
+            background: radial-gradient(circle at center, #1a0033 0%, #000000 100%);
+            z-index: 1000;
+            animation: cosmicPulse 8s ease-in-out infinite;
+        }
+
+        @keyframes cosmicPulse {
+            0%, 100% { background: radial-gradient(circle at center, #1a0033 0%, #000000 100%); }
+            50% { background: radial-gradient(circle at center, #2d1a4d 0%, #000000 100%); }
+        }
+
+        #intro-content {
+            max-width: 800px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        #intro-title {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(147, 51, 234, 0.8);
+            letter-spacing: 4px;
+            animation: titleGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { text-shadow: 0 0 30px rgba(147, 51, 234, 0.8); }
+            50% { text-shadow: 0 0 50px rgba(147, 51, 234, 1); }
+        }
+
+        #intro-subtitle {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        #intro-description {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 50px;
+            opacity: 0.9;
+        }
+
+        #enter-btn {
+            padding: 20px 50px;
+            font-size: 20px;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            cursor: pointer;
+            border-radius: 15px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: all 0.3s ease;
+            animation: btnPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes btnPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(102, 126, 234, 0.5); }
+            50% { transform: scale(1.05); box-shadow: 0 0 40px rgba(102, 126, 234, 0.8); }
+        }
+
+        #enter-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 50px rgba(102, 126, 234, 1);
+        }
+
+        /* Main Mirror Interface */
+        #mirror-interface {
+            display: none;
+            width: 100%;
+            height: 100vh;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         #container {
             position: relative;
             width: 90vw;
             max-width: 1200px;
-            height: 70vh;
+            height: 75vh;
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 0 50px rgba(255, 255, 255, 0.1);
@@ -42,6 +127,81 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        /* Reality Overlays */
+        .reality-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .reality-overlay.active {
+            opacity: 1;
+        }
+
+        .atmosphere-text {
+            position: absolute;
+            font-size: 14px;
+            padding: 10px 15px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 300px;
+            line-height: 1.5;
+        }
+
+        /* Verdant Spire Overlays */
+        #verdant-overlay .atmosphere-text {
+            border-color: rgba(50, 255, 100, 0.4);
+            color: #90ee90;
+        }
+
+        /* Chrome Labyrinth Overlays */
+        #chrome-overlay .atmosphere-text {
+            border-color: rgba(255, 0, 255, 0.6);
+            color: #ff00ff;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Void Overlays */
+        #void-overlay .atmosphere-text {
+            border-color: rgba(147, 51, 234, 0.6);
+            color: #c4b5fd;
+        }
+
+        .environment-readings {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 12px;
+            font-family: 'Courier New', monospace;
+            line-height: 1.8;
+        }
+
+        .ambient-description {
+            position: absolute;
+            bottom: 100px;
+            right: 20px;
+            text-align: right;
+            font-style: italic;
+            font-size: 13px;
+        }
+
+        .universe-title {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 2px;
         }
 
         #controls {
@@ -84,7 +244,7 @@
             top: 30px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 28px;
+            font-size: 24px;
             font-weight: bold;
             text-align: center;
             z-index: 10;
@@ -97,6 +257,7 @@
         }
 
         #start-btn {
+            display: none;
             padding: 20px 40px;
             font-size: 20px;
             background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
@@ -108,6 +269,7 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             transition: all 0.3s ease;
+            margin-top: 20px;
         }
 
         #start-btn:hover {
@@ -174,34 +336,130 @@
             transition: width 0.1s ease;
             width: 0%;
         }
+
+        .intro-stars {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
     </style>
 </head>
 <body>
     <div id="cursor"></div>
     
-    <div id="container">
-        <video id="webcam" autoplay playsinline></video>
-        <canvas id="canvas"></canvas>
-        
-        <div id="reality-label">REALITY SHARD ONE: THE VERDANT SPIRE</div>
-        
-        <div id="motion-indicator" style="display: none;">
-            <div>MOTION ENERGY</div>
-            <div class="motion-bar">
-                <div class="motion-fill"></div>
-            </div>
-        </div>
-        
-        <div id="controls" style="display: none;">
-            <button class="reality-btn active" data-reality="0">VERDANT SPIRE</button>
-            <button class="reality-btn" data-reality="1">CHROME LABYRINTH</button>
-            <button class="reality-btn" data-reality="2">WHISPERING VOID</button>
+    <!-- Introduction Screen -->
+    <div id="intro-screen">
+        <div id="intro-content">
+            <h1 id="intro-title">⚡ MULTIVERSE MIRROR ⚡</h1>
+            <p id="intro-subtitle">A Portal Between Parallel Realities</p>
+            <p id="intro-description">
+                You are not locked into a single timeline. This mirror fractures your reflection across three parallel universes—each with its own laws of physics, aesthetics, and consciousness.<br><br>
+                
+                Your movements will ripple through dimensions. Your presence will reshape reality. You will witness versions of yourself that exist in worlds beyond imagination.<br><br>
+                
+                <strong>Which reality calls to you?</strong>
+            </p>
+            <button id="enter-btn">ENTER THE PORTAL</button>
         </div>
     </div>
 
-    <button id="start-btn">INITIATE MULTIVERSE PORTAL</button>
+    <!-- Main Mirror Interface -->
+    <div id="mirror-interface">
+        <div id="container">
+            <video id="webcam" autoplay playsinline></video>
+            <canvas id="canvas"></canvas>
+            
+            <!-- Verdant Spire Overlay -->
+            <div id="verdant-overlay" class="reality-overlay active">
+                <div class="environment-readings atmosphere-text">
+                    <div>◆ ATMOSPHERE: Ozone & Petrichor</div>
+                    <div>◆ TEMPERATURE: 22°C (Optimal)</div>
+                    <div>◆ CONSCIOUSNESS: Collective</div>
+                    <div>◆ ENERGY: Bio-luminescent</div>
+                </div>
+                <div class="universe-title atmosphere-text">
+                    VERDANT SPIRE<br>
+                    <span style="font-size: 11px; opacity: 0.7;">Universe Classification: Symbiotic Eden</span>
+                </div>
+                <div class="ambient-description atmosphere-text">
+                    Living glass towers hum with<br>
+                    shared consciousness.<br>
+                    Tech-orchids bloom in jade light.<br>
+                    You are part of the breath itself.
+                </div>
+            </div>
+
+            <!-- Chrome Labyrinth Overlay -->
+            <div id="chrome-overlay" class="reality-overlay">
+                <div class="environment-readings atmosphere-text">
+                    <div>► STATUS: ONLINE</div>
+                    <div>► NETWORK: SHADOWNET_ACTIVE</div>
+                    <div>► DATA_CORRUPTION: 23%</div>
+                    <div>► SIGNAL: FRAGMENTED</div>
+                </div>
+                <div class="universe-title atmosphere-text">
+                    CHROME LABYRINTH<br>
+                    <span style="font-size: 11px; opacity: 0.7;">Universe Classification: Digital Dystopia</span>
+                </div>
+                <div class="ambient-description atmosphere-text">
+                    Rain falls in streams of data.<br>
+                    Chrome facades reflect infinite selves.<br>
+                    The city feeds on information.<br>
+                    You are the signal in static.
+                </div>
+            </div>
+
+            <!-- Whispering Void Overlay -->
+            <div id="void-overlay" class="reality-overlay">
+                <div class="environment-readings atmosphere-text">
+                    <div>∞ COORDINATES: UNDEFINED</div>
+                    <div>∞ TIME: NON-LINEAR</div>
+                    <div>∞ MATTER STATE: Quantum Flux</div>
+                    <div>∞ CONSCIOUSNESS: Unbound</div>
+                </div>
+                <div class="universe-title atmosphere-text">
+                    WHISPERING VOID<br>
+                    <span style="font-size: 11px; opacity: 0.7;">Universe Classification: Cosmic Abyss</span>
+                </div>
+                <div class="ambient-description atmosphere-text">
+                    Galaxies spiral in slow majesty.<br>
+                    Ancient gods whisper in energy.<br>
+                    You are dust and starlight.<br>
+                    The void embraces you home.
+                </div>
+            </div>
+            
+            <div id="reality-label">REALITY SHARD ONE: THE VERDANT SPIRE</div>
+            
+            <div id="motion-indicator" style="display: none;">
+                <div>MOTION ENERGY</div>
+                <div class="motion-bar">
+                    <div class="motion-fill"></div>
+                </div>
+            </div>
+            
+            <div id="controls" style="display: none;">
+                <button class="reality-btn active" data-reality="0">VERDANT SPIRE</button>
+                <button class="reality-btn" data-reality="1">CHROME LABYRINTH</button>
+                <button class="reality-btn" data-reality="2">WHISPERING VOID</button>
+            </div>
+        </div>
+
+        <button id="start-btn">INITIATE MULTIVERSE PORTAL</button>
+    </div>
 
     <script>
+        const introScreen = document.getElementById('intro-screen');
+        const mirrorInterface = document.getElementById('mirror-interface');
+        const enterBtn = document.getElementById('enter-btn');
         const video = document.getElementById('webcam');
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
@@ -223,10 +481,31 @@
         let motionAmount = 0;
 
         const realities = [
-            { name: 'REALITY SHARD ONE: THE VERDANT SPIRE', color: '#2d5016' },
-            { name: 'REALITY SHARD TWO: NEON ECHOES IN THE CHROME LABYRINTH', color: '#ff00ff' },
-            { name: 'REALITY SHARD THREE: THE WHISPERING VOID', color: '#1a0033' }
+            { name: 'REALITY SHARD ONE: THE VERDANT SPIRE', overlay: 'verdant-overlay' },
+            { name: 'REALITY SHARD TWO: NEON ECHOES IN THE CHROME LABYRINTH', overlay: 'chrome-overlay' },
+            { name: 'REALITY SHARD THREE: THE WHISPERING VOID', overlay: 'void-overlay' }
         ];
+
+        // Create intro stars
+        for (let i = 0; i < 50; i++) {
+            const star = document.createElement('div');
+            star.className = 'intro-stars';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            introScreen.appendChild(star);
+        }
+
+        // Enter button
+        enterBtn.addEventListener('click', () => {
+            introScreen.style.transition = 'opacity 1s ease';
+            introScreen.style.opacity = '0';
+            setTimeout(() => {
+                introScreen.style.display = 'none';
+                mirrorInterface.style.display = 'flex';
+                startBtn.style.display = 'block';
+            }, 1000);
+        });
 
         // Mouse tracking
         document.addEventListener('mousemove', (e) => {
@@ -234,8 +513,6 @@
             mouseY = e.clientY;
             cursor.style.left = mouseX - 10 + 'px';
             cursor.style.top = mouseY - 10 + 'px';
-            
-            // Update particles based on mouse position
             updateParticlesFromMouse(e.clientX, e.clientY);
         });
 
@@ -271,6 +548,12 @@
                 currentReality = parseInt(btn.dataset.reality);
                 realityLabel.textContent = realities[currentReality].name;
                 
+                // Switch overlays
+                document.querySelectorAll('.reality-overlay').forEach(overlay => {
+                    overlay.classList.remove('active');
+                });
+                document.getElementById(realities[currentReality].overlay).classList.add('active');
+                
                 particles.forEach(p => p.element.remove());
                 particles = [];
                 createParticles();
@@ -298,10 +581,13 @@
                 
                 if (currentReality === 0) {
                     particle.element.style.background = `hsla(${120 + Math.random() * 60}, 70%, 60%, 0.8)`;
+                    particle.element.style.boxShadow = '0 0 10px rgba(50, 255, 100, 0.8)';
                 } else if (currentReality === 1) {
                     particle.element.style.background = `hsla(${280 + Math.random() * 80}, 100%, 60%, 0.8)`;
+                    particle.element.style.boxShadow = '0 0 10px rgba(255, 0, 255, 0.8)';
                 } else {
                     particle.element.style.background = `hsla(${200 + Math.random() * 100}, 80%, 70%, 0.8)`;
+                    particle.element.style.boxShadow = '0 0 10px rgba(147, 51, 234, 0.8)';
                 }
                 
                 container.appendChild(particle.element);
@@ -329,18 +615,15 @@
 
         function updateParticles() {
             particles.forEach(p => {
-                // Motion influence
                 p.vx += (Math.random() - 0.5) * 0.1 * motionAmount;
                 p.vy += (Math.random() - 0.5) * 0.1 * motionAmount;
                 
                 p.x += p.vx;
                 p.y += p.vy;
                 
-                // Damping
                 p.vx *= 0.98;
                 p.vy *= 0.98;
                 
-                // Boundary check
                 if (p.x < 0 || p.x > 100) p.vx *= -1;
                 if (p.y < 0 || p.y > 100) p.vy *= -1;
                 
@@ -364,7 +647,7 @@
             }
             
             let totalDiff = 0;
-            const step = 4 * 10; // Sample every 10 pixels for performance
+            const step = 4 * 10;
             
             for (let i = 0; i < currentData.length; i += step) {
                 const diff = Math.abs(currentData[i] - prevImageData[i]) +
@@ -383,7 +666,6 @@
             const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
             const data = imageData.data;
             
-            // Detect motion
             motionAmount = detectMotion(data) / 50;
             motionAmount = Math.min(1, motionAmount);
             motionFill.style.width = (motionAmount * 100) + '%';
@@ -391,131 +673,132 @@
             time += 0.016;
             updateParticles();
 
-            // Get mouse position relative to canvas
             const rect = canvas.getBoundingClientRect();
             const canvasMouseX = ((mouseX - rect.left) / rect.width) * canvas.width;
             const canvasMouseY = ((mouseY - rect.top) / rect.height) * canvas.height;
 
             if (currentReality === 0) {
-                // VERDANT SPIRE: Bio-luminescent organic growth
+                // VERDANT SPIRE: Living glass and bio-luminescence
                 for (let i = 0; i < data.length; i += 4) {
                     const x = (i / 4) % canvas.width;
                     const y = Math.floor((i / 4) / canvas.width);
                     
-                    // Distance from cursor creates growth patterns
                     const dx = x - canvasMouseX;
                     const dy = y - canvasMouseY;
                     const distToCursor = Math.sqrt(dx * dx + dy * dy);
                     const cursorInfluence = Math.max(0, 1 - distToCursor / 200);
                     
-                    // Motion creates organic pulses
                     const wave = Math.sin(time * 2 + x * 0.01 + y * 0.01 + motionAmount * 10) * 30;
                     const brightness = (data[i] + data[i + 1] + data[i + 2]) / 3;
                     
-                    data[i] = Math.min(255, data[i] * 0.6 + wave + cursorInfluence * 50);
-                    data[i + 1] = Math.min(255, data[i + 1] * 1.3 + brightness * 0.3 + wave + motionAmount * 50);
-                    data[i + 2] = Math.min(255, data[i + 2] * 0.7 + wave + cursorInfluence * 30);
+                    // Jade-green bio-luminescent effect
+                    data[i] = Math.min(255, data[i] * 0.5 + wave + cursorInfluence * 40);
+                    data[i + 1] = Math.min(255, data[i + 1] * 1.4 + brightness * 0.4 + wave + motionAmount * 60);
+                    data[i + 2] = Math.min(255, data[i + 2] * 0.6 + wave * 0.5 + cursorInfluence * 30);
                 }
                 
                 ctx.putImageData(imageData, 0, 0);
                 
-                // Cursor creates bio-luminescent ripples
+                // Living glass shimmer
                 ctx.globalCompositeOperation = 'screen';
-                const gradient = ctx.createRadialGradient(canvasMouseX, canvasMouseY, 0, canvasMouseX, canvasMouseY, 150);
-                gradient.addColorStop(0, `rgba(100, 255, 150, ${0.3 + motionAmount * 0.2})`);
+                const gradient = ctx.createRadialGradient(canvasMouseX, canvasMouseY, 0, canvasMouseX, canvasMouseY, 200);
+                gradient.addColorStop(0, `rgba(100, 255, 150, ${0.4 + motionAmount * 0.3})`);
                 gradient.addColorStop(1, 'rgba(50, 255, 100, 0)');
                 ctx.fillStyle = gradient;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 
-                ctx.fillStyle = `rgba(50, 255, 100, ${0.05 + Math.sin(time) * 0.02 + motionAmount * 0.1})`;
+                // Jade atmosphere
+                ctx.fillStyle = `rgba(80, 200, 120, ${0.08 + Math.sin(time) * 0.03})`;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 ctx.globalCompositeOperation = 'source-over';
                 
             } else if (currentReality === 1) {
-                // CHROME LABYRINTH: Reactive cyberpunk glitches
+                // CHROME LABYRINTH: Neon rain and data corruption
                 for (let i = 0; i < data.length; i += 4) {
                     const x = (i / 4) % canvas.width;
                     const y = Math.floor((i / 4) / canvas.width);
                     
-                    // Cursor creates data corruption zones
                     const dx = x - canvasMouseX;
                     const dy = y - canvasMouseY;
                     const distToCursor = Math.sqrt(dx * dx + dy * dy);
-                    const cursorGlitch = distToCursor < 100 ? (100 - distToCursor) / 100 : 0;
+                    const cursorGlitch = distToCursor < 120 ? (120 - distToCursor) / 120 : 0;
                     
-                    // Motion triggers scanline interference
-                    const scanline = Math.sin(y * 0.5 + time * 10 + motionAmount * 50) * 30;
+                    // Scanline and data rain
+                    const scanline = Math.sin(y * 0.3 + time * 12 + motionAmount * 60) * 40;
+                    const rainEffect = Math.sin(y * 0.1 - time * 5) * 20;
                     
-                    // RGB chromatic aberration from cursor
-                    const shift = cursorGlitch * 10;
+                    data[i] = Math.min(255, data[i] * 1.3 + scanline + cursorGlitch * 120 + rainEffect);
+                    data[i + 1] = Math.min(255, data[i + 1] * 0.7 + rainEffect * 0.5);
+                    data[i + 2] = Math.min(255, data[i + 2] * 1.5 + scanline + cursorGlitch * 80);
                     
-                    data[i] = Math.min(255, data[i] * 1.3 + scanline + cursorGlitch * 100);
-                    data[i + 1] = Math.min(255, data[i + 1] * 0.8);
-                    data[i + 2] = Math.min(255, data[i + 2] * 1.4 + scanline);
-                    
-                    // Motion-triggered digital noise
-                    if (Math.random() > (0.99 - motionAmount * 0.05)) {
-                        data[i] = data[i + 1] = data[i + 2] = Math.random() * 255;
+                    // Digital corruption
+                    if (Math.random() > (0.985 - motionAmount * 0.08 - cursorGlitch * 0.1)) {
+                        const glitchColor = Math.random() > 0.5 ? 255 : 0;
+                        data[i] = glitchColor;
+                        data[i + 1] = Math.random() * 255;
+                        data[i + 2] = 255 - glitchColor;
                     }
                 }
                 
                 ctx.putImageData(imageData, 0, 0);
                 
-                // Cursor creates neon field distortion
+                // Chrome reflection and neon glow
                 ctx.globalCompositeOperation = 'screen';
-                const neonGrad = ctx.createRadialGradient(canvasMouseX, canvasMouseY, 0, canvasMouseX, canvasMouseY, 200);
-                neonGrad.addColorStop(0, `rgba(255, 0, 255, ${0.4 + motionAmount * 0.3})`);
+                const neonGrad = ctx.createRadialGradient(canvasMouseX, canvasMouseY, 0, canvasMouseX, canvasMouseY, 250);
+                neonGrad.addColorStop(0, `rgba(255, 0, 255, ${0.5 + motionAmount * 0.4})`);
                 neonGrad.addColorStop(0.5, `rgba(0, 255, 255, ${0.2})`);
                 neonGrad.addColorStop(1, 'rgba(255, 0, 255, 0)');
                 ctx.fillStyle = neonGrad;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 
-                ctx.fillStyle = `rgba(255, 0, 255, ${0.08 + Math.sin(time * 2) * 0.03 + motionAmount * 0.15})`;
+                // Synthetic atmosphere
+                ctx.fillStyle = `rgba(200, 0, 200, ${0.1 + Math.sin(time * 3) * 0.04})`;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 ctx.globalCompositeOperation = 'source-over';
                 
             } else {
-                // WHISPERING VOID: Cosmic consciousness field
+                // WHISPERING VOID: Cosmic nebulae and quantum flux
                 for (let i = 0; i < data.length; i += 4) {
                     const x = (i / 4) % canvas.width;
                     const y = Math.floor((i / 4) / canvas.width);
                     
-                    // Cursor creates gravity wells in space-time
                     const dx = x - canvasMouseX;
                     const dy = y - canvasMouseY;
                     const distToCursor = Math.sqrt(dx * dx + dy * dy);
-                    const gravityWell = Math.max(0, 1 - distToCursor / 300);
+                    const gravityWell = Math.max(0, 1 - distToCursor / 350);
                     
-                    // Motion ripples through the void
-                    const distance = Math.sqrt(Math.pow(x - canvas.width/2, 2) + Math.pow(y - canvas.height/2, 2));
+                    // Spiral galaxy effect
+                    const centerDist = Math.sqrt(Math.pow(x - canvas.width/2, 2) + Math.pow(y - canvas.height/2, 2));
                     const angle = Math.atan2(y - canvas.height/2, x - canvas.width/2);
-                    const wave = Math.sin(distance * 0.02 + time + angle * 2 + motionAmount * 5) * 40;
+                    const spiral = Math.sin(centerDist * 0.015 + time + angle * 3 + motionAmount * 8) * 50;
                     
                     const brightness = (data[i] + data[i + 1] + data[i + 2]) / 3;
                     
-                    data[i] = Math.min(255, brightness * 0.7 + wave + gravityWell * 80);
-                    data[i + 1] = Math.min(255, brightness * 0.5 + wave + gravityWell * 50);
-                    data[i + 2] = Math.min(255, brightness * 1.3 + wave + gravityWell * 150 + motionAmount * 50);
+                    // Deep space colors
+                    data[i] = Math.min(255, brightness * 0.6 + spiral * 0.5 + gravityWell * 100);
+                    data[i + 1] = Math.min(255, brightness * 0.4 + spiral * 0.3 + gravityWell * 60);
+                    data[i + 2] = Math.min(255, brightness * 1.5 + spiral + gravityWell * 180 + motionAmount * 70);
                 }
                 
                 ctx.putImageData(imageData, 0, 0);
                 
-                // Cursor is a stellar consciousness point
+                // Nebula and cosmic dust
                 ctx.globalCompositeOperation = 'screen';
-                const cosmicGrad = ctx.createRadialGradient(canvasMouseX, canvasMouseY, 0, canvasMouseX, canvasMouseY, 250);
-                cosmicGrad.addColorStop(0, `rgba(150, 100, 255, ${0.5 + motionAmount * 0.3})`);
-                cosmicGrad.addColorStop(0.5, `rgba(100, 50, 200, ${0.3})`);
-                cosmicGrad.addColorStop(1, 'rgba(50, 20, 150, 0)');
+                const cosmicGrad = ctx.createRadialGradient(canvasMouseX, canvasMouseY, 0, canvasMouseX, canvasMouseY, 300);
+                cosmicGrad.addColorStop(0, `rgba(180, 120, 255, ${0.6 + motionAmount * 0.3})`);
+                cosmicGrad.addColorStop(0.5, `rgba(120, 80, 220, ${0.3})`);
+                cosmicGrad.addColorStop(1, 'rgba(60, 30, 150, 0)');
                 ctx.fillStyle = cosmicGrad;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 
+                // Deep void gradient
                 const voidGrad = ctx.createRadialGradient(
                     canvas.width/2, canvas.height/2, 0,
                     canvas.width/2, canvas.height/2, canvas.width/2
                 );
-                voidGrad.addColorStop(0, `rgba(100, 50, 200, ${0.15 + Math.sin(time) * 0.05})`);
-                voidGrad.addColorStop(0.5, `rgba(50, 20, 150, ${0.08})`);
-                voidGrad.addColorStop(1, 'rgba(20, 10, 60, 0)');
+                voidGrad.addColorStop(0, `rgba(120, 70, 220, ${0.2 + Math.sin(time) * 0.06})`);
+                voidGrad.addColorStop(0.5, `rgba(70, 30, 180, ${0.12})`);
+                voidGrad.addColorStop(1, 'rgba(30, 10, 80, 0)');
                 ctx.fillStyle = voidGrad;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 ctx.globalCompositeOperation = 'source-over';
