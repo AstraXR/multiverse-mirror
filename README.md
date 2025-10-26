@@ -141,7 +141,7 @@ If this project resonates with you:
 - ⭐ Star this repository
 - 🔀 Fork and create your own reality shards
 - 💬 Share your experiences and screenshots
-- 🎨 Support the creator on [Patreon](INSERT_YOUR_PATREON_LINK)
+- 🎨 Support the creator on [Patreon](https://www.patreon.com/cw/astraverse_ai))
 
 ---
 
